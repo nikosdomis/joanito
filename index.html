@@ -123,12 +123,10 @@
             border-radius: 2px;
         }
 
-        /* Αρχικές Κλίσεις */
         .polaroid:nth-child(1) { transform: rotate(-4deg); z-index: 1; }
         .polaroid:nth-child(2) { transform: rotate(4deg); z-index: 2; }
         .polaroid:nth-child(3) { transform: rotate(-2deg); z-index: 3; }
 
-        /* Εφέ Hover/Touch στο Κολάζ */
         .polaroid:hover, .polaroid:active {
             transform: scale(1.1) rotate(0deg) !important;
             z-index: 100;
@@ -142,9 +140,11 @@
             width: 220px;
         }
 
+        /* --- Διορθωμένες Καρδιές Φόντου --- */
         .heart-bg {
             position: fixed;
-            color: rgba(214, 51, 132, 0.08);
+            color: #ff4d6d; /* Πιο έντονο ροζ */
+            opacity: 0.2;   /* 20% ορατότητα για να φαίνονται καθαρά */
             pointer-events: none;
             z-index: -1;
         }
@@ -173,7 +173,7 @@
     </div>
 
     <div id="collagePage">
-        <h1 class="collage-title">Το ήξερα ότι με θες! 🌹</h1>
+        <h1 class="collage-title">ΤΟ ΞΕΡΑ ΟΤΙ ΜΕ ΘΕΣ 🌹</h1>
         
         <div class="collage-grid">
             <div class="polaroid">
@@ -240,7 +240,8 @@
             window.location.href = "tel:+306972362235";
         }
 
-        for (let i = 0; i < 20; i++) {
+        // Δημιουργία καρδιών
+        for (let i = 0; i < 25; i++) {
             const h = document.createElement('div');
             h.className = 'heart-bg';
             h.innerHTML = '❤️';
