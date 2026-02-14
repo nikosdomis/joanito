@@ -21,11 +21,12 @@
         #questionPage {
             text-align: center;
             z-index: 10;
+            width: 100%;
         }
 
         .container {
             background: white;
-            padding: 40px 30px;
+            padding: 40px 20px;
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             width: 85%;
@@ -35,12 +36,12 @@
 
         h1 {
             color: #d63384;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 10px;
         }
 
         #hintArea {
-            visibility: hidden;
+            visibility: hidden; 
             color: #ff4d6d;
             font-size: 1.8rem;
             font-weight: bold;
@@ -55,17 +56,18 @@
         @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(10px); } }
 
         .button-wrapper {
-            position: relative;
-            height: 60px;
             display: flex;
             justify-content: center;
+            gap: 20px;
+            height: 60px;
             align-items: center;
+            position: relative;
         }
 
         button {
-            width: 150px;
+            width: 140px;
             height: 55px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             border: none;
             border-radius: 50px;
@@ -73,18 +75,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: absolute;
+            transition: transform 0.2s;
+            gap: 5px;
         }
 
-        #yesBtn { background-color: #ff4d6d; color: white; z-index: 1; }
-        #noBtn { background-color: #6c757d; color: white; z-index: 2; transition: all 0.15s ease-out; }
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { background-color: #6c757d; color: white; transition: all 0.15s ease-out; }
 
-        /* --- Σελίδα Κολάζ (Κρυφή αρχικά) --- */
+        /* --- Σελίδα Κολάζ --- */
         #collagePage {
             display: none;
             text-align: center;
             width: 100%;
-            padding: 20px;
+            padding: 20px 20px 60px 20px;
             animation: fadeIn 1s ease-in;
         }
 
@@ -92,49 +95,51 @@
 
         .collage-title {
             color: #d63384;
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 30px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .collage-grid {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 35px;
         }
 
-        /* Στυλ Polaroid για τις φωτογραφίες */
         .polaroid {
             background: white;
-            padding: 10px 10px 30px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            border-radius: 5px;
-            max-width: 250px;
-            transition: transform 0.3s;
+            padding: 10px 10px 35px 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-radius: 3px;
+            max-width: 280px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
 
         .polaroid img {
             width: 100%;
             height: auto;
+            display: block;
             border-radius: 2px;
         }
 
-        /* Τυχαίες κλίσεις για πιο φυσικό στυλ */
-        .polaroid:nth-child(1) { transform: rotate(-3deg); }
-        .polaroid:nth-child(2) { transform: rotate(2deg); }
-        .polaroid:nth-child(3) { transform: rotate(-1deg); }
+        /* Αρχικές Κλίσεις */
+        .polaroid:nth-child(1) { transform: rotate(-4deg); z-index: 1; }
+        .polaroid:nth-child(2) { transform: rotate(4deg); z-index: 2; }
+        .polaroid:nth-child(3) { transform: rotate(-2deg); z-index: 3; }
 
-        .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 20; }
+        /* Εφέ Hover/Touch στο Κολάζ */
+        .polaroid:hover, .polaroid:active {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 100;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
 
         #callFinalBtn {
-            margin-top: 40px;
+            margin: 50px auto;
             background-color: #ff4d6d;
             color: white;
-            position: relative; /* Για να μην πετάει όπως το αρχικό No */
-            width: 200px;
-            margin-left: auto;
-            margin-right: auto;
+            width: 220px;
         }
 
         .heart-bg {
@@ -168,7 +173,7 @@
     </div>
 
     <div id="collagePage">
-        <h1 class="collage-title">I knew you'd say YES! 🌹</h1>
+        <h1 class="collage-title">Το ήξερα ότι με θες! 🌹</h1>
         
         <div class="collage-grid">
             <div class="polaroid">
@@ -182,7 +187,7 @@
             </div>
         </div>
 
-        <button id="callFinalBtn" onclick="makeCall()">Κάλεσε με! 📞</button>
+        <button id="callFinalBtn" onclick="makeCall()">ΤΗΛ ? 📞</button>
     </div>
 
     <script>
@@ -225,17 +230,16 @@
         }
 
         function showCollage() {
-            // Κρύβουμε την ερώτηση και δείχνουμε τις φωτό
             document.getElementById('questionPage').style.display = 'none';
             document.getElementById('collagePage').style.display = 'block';
-            document.body.style.overflowY = 'auto'; // Επιτρέπουμε το σκρολάρισμα για να δει τις φωτό
+            document.body.style.overflowY = 'auto'; 
+            window.scrollTo(0, 0);
         }
 
         function makeCall() {
             window.location.href = "tel:+306972362235";
         }
 
-        // Background hearts
         for (let i = 0; i < 20; i++) {
             const h = document.createElement('div');
             h.className = 'heart-bg';
